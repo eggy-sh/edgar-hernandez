@@ -26,10 +26,11 @@ My work covers the full path from an operational problem to a supported system: 
 
 - Designed and own **Pacman**, a Python publishing orchestrator that connects content metadata, validation, queuing, and Telestream Vantage ingest for North American and European teams. Built reusable eligibility rules, priority scheduling, source/destination adapters, and self-service APIs.
 - Added retry windows, failure summaries, editorial escalation, label-based exceptions, copy-failure recovery, and service-health alerts. Published operator documentation and a pipeline dashboard; no-touch ingest rose from 55.6% in September to 100% in December 2025.
-- Built **lxg-cosmo-tools**, a Python CLI for project, course, caption, taxonomy, and bulk content operations. Structured JSON output and `--dry-run` modes support safe use by scripts, agents, and non-engineering operators. Pytest regressions cover API response handling and command behavior.
+- Built **lxg-cosmo-tools**, a Python CLI for project, course, caption, taxonomy, and bulk content operations. Structured JSON output and guarded bulk updates support safe use by scripts, agents, and non-engineering operators. Pytest regressions cover API response handling and command behavior.
+- Guided taxonomy and naming decisions across internal tools, production studio filesystems, CMS workflow states, and AI integrations so regional teams used consistent terms and handoff points.
 - Owned Publishing Operations integration, UAT, and release sign-off for **Microsoft Whisper within Telestream Vantage**. Built a regression framework to detect caption drift across formatting changes. The partner launch report measured turnaround at about 10 minutes, down from 24 hours.
 - Engineered prompts and a Python harness for **PastForward**, helping the team generate and publish roughly 54,000 video descriptions through the Anthropic API. The workflow included validation rules, cost checks, and a 500-video pilot.
-- Built a taxonomy normalizer that combines vector-embedding candidates with Anthropic API classification. Low-confidence suggestions go to editorial review, and accepted mappings become examples in later prompt context.
+- Built semantic skill mapping that combines vector-embedding candidates with Anthropic API classification. Low-confidence suggestions go to editorial review, and accepted mappings become examples in later prompt context.
 - Led a cross-team rollout that replaced burned-in video URLs with downloadable resources. Pacman publishes and republishes the PDF artifacts automatically, removing manual uploads from the release workflow.
 - Migrated publishing APIs to managed Linux VMs, reducing dependence on workstation Python environments and giving operators self-service access without routine server logins.
 
@@ -64,13 +65,17 @@ Microsoft Whisper integration inside the Vantage workflow, with publishing gates
 
 Prompt and API harness for batch description generation, validation, cost checks, and publication to Cosmo. The team used the workflow to generate and publish roughly 54,000 descriptions.
 
-### Taxonomy Normalization
+### Semantic Skill Mapping
 
 Hybrid workflow combining vector embeddings and Anthropic API classification. Editorial reviewers handle uncertain suggestions, and accepted mappings improve later prompt context.
 
 ### LXG Cosmo Tools
 
-Python CLI for content-management operations across courses, projects, captions, categories, learning paths, and bulk transformers. Includes test-environment defaults, JSON output, dry-run previews, retryable failure files, and bundled agent instructions.
+Python CLI for content-management operations across courses, projects, captions, categories, learning paths, and bulk transformers. Includes test-environment defaults, JSON output, validation safeguards, retryable failure files, and bundled agent instructions.
+
+### Platform and Workflow Taxonomy
+
+Shared vocabulary for internal tools, production studio filesystems, CMS states, and AI integrations. The work aligns naming, ownership boundaries, and handoff points so regional teams can build automation against the same operating model.
 
 ## Education
 
