@@ -1,197 +1,83 @@
 # Edgar Hernandez
-**Staff Workflow Engineer | Python Developer | Media Automation Specialist**
 
-📧 h.edgar714@gmail.com | 📱 +1-714-757-9628 | 🐦 [@eggpression](https://twitter.com/eggpression) | 💼 [LinkedIn](https://linkedin.com/in/ehernandez0) | 💻 [GitHub](https://github.com/edgarh92)
+**Staff Engineer, Publishing Platforms & Applied AI**
 
----
+[Email](mailto:h.edgar714@gmail.com) · [LinkedIn](https://linkedin.com/in/ehernandez0/) · [GitHub](https://github.com/edgarh92)
 
-## Professional Summary
+## Profile
 
-Staff engineer with 8+ years of experience leading workflow automation, building scalable media pipelines, and driving platform standardization. Demonstrated expertise in cross-functional leadership, mentoring engineering teams, and delivering measurable business impact through technical solutions. Deep knowledge in Python, cloud platforms (Azure, GCP), and media processing architectures, with focus on operational excellence and strategic platform initiatives.
+Staff Publication Workflow Engineer building Python services, media pipelines, and applied AI workflows for LinkedIn Learning content systems across North America and Europe.
 
----
+My work covers the full path from an operational problem to a supported system: requirements, API and data design, evaluation, deployment, rollout, monitoring, and incident recovery.
 
 ## Technical Expertise
 
-### Programming Languages
-- **Python** (Expert) - FastAPI, Django, Langchain, Langgraph, Pydantic, asyncio, multiprocessing
-- **SQL** (Advanced) - MySQL, PostgreSQL, MongoDB, Cosmos DB, query optimization, NoSQL
-- **Bash/Shell Scripting** (Advanced) - Automation, system administration
-- **CSS, HTML** - Web development
-- **Prompt Engineering** - LLM optimization and AI integration
+- **AI and evaluation:** Anthropic Messages API, Microsoft Whisper, vector embeddings, prompt and evaluation harnesses, human review
+- **Backend and data:** Python, FastAPI, Pydantic, REST APIs, PostgreSQL, MySQL, SQLite, JSON Schema
+- **Media systems:** Telestream Vantage, FFmpeg, FFprobe, VMAF, PyMediaInfo, HLS/DASH
+- **Platforms and reliability:** Linux, Azure, managed services, job monitoring, failure recovery, pytest
+- **Architecture:** Event-driven pipelines, pluggable adapters, priority queues, validation gates, batch processing
 
-### Backend & APIs
-- **Web Frameworks**: FastAPI, Django, Flask, REST API development
-- **Database**: MySQL, PostgreSQL, MongoDB, Cosmos DB, NoSQL, database design, ETL pipelines
-- **API Development**: RESTful APIs, microservices architecture, API integration
-- **Message Queues**: Kafka, Redis, Azure Message Queues
+## Experience
 
-### Media & Video Processing
-- **Video Encoding**: FFmpeg, FFProbe, x264, HLS/DASH, VMAF quality analysis
-- **Media Tools**: MediaInfo, pymediainfo, pydub-ng, Telestream, Rclone
-- **Workflows**: Video transcoding pipelines, batch processing, media archiving, media validation
-- **Optimization**: Performance tuning, QoE improvement, resource allocation, audio processing
+### LinkedIn — Staff Publication Workflow Engineer
 
-### AI/ML & Automation
-- **Prompt Engineering**: LLM prompt optimization and research
-- **AI Tools**: Langgraph for agentic workflows, Ollama for local LLM inference, ChromaDB for embeddings and vector storage
-- **AI Research**: Experimentation and research with AI tools for automation and productivity
-- **Automation**: Workflow automation, web scraping (Selenium, Playwright, BeautifulSoup)
+**April 2025–present**
 
-### Cloud & Infrastructure
-- **Cloud Platforms**: Azure, Google Cloud Platform (GCP), AWS, Vercel
-- **Azure Services**: Azure Functions, Azure App Services, Azure Front Door, Blob Storage, Cosmos DB
-- **Storage**: Cloud storage, media replication, distributed storage
-- **DevOps**: Git, CI/CD, Docker, serverless functions, GCP services, Linux
-- **Monitoring**: Observability, logging, performance metrics, system monitoring, Teams webhooks
-- **Data Analysis**: Pandas, data processing, analytics
+- Designed and own **Pacman**, a Python publishing orchestrator that connects content metadata, validation, queuing, and Telestream Vantage ingest for North American and European teams. Built reusable eligibility rules, priority scheduling, source/destination adapters, and self-service APIs.
+- Added retry windows, failure summaries, editorial escalation, label-based exceptions, copy-failure recovery, and service-health alerts. Published operator documentation and a pipeline dashboard; no-touch ingest rose from 55.6% in September to 100% in December 2025.
+- Built **lxg-cosmo-tools**, a Python CLI for project, course, caption, taxonomy, and bulk content operations. Structured JSON output and `--dry-run` modes support safe use by scripts, agents, and non-engineering operators. Pytest regressions cover API response handling and command behavior.
+- Owned Publishing Operations integration, UAT, and release sign-off for **Microsoft Whisper within Telestream Vantage**. Built a regression framework to detect caption drift across formatting changes. The partner launch report measured turnaround at about 10 minutes, down from 24 hours.
+- Engineered prompts and a Python harness for **PastForward**, helping the team generate and publish roughly 54,000 video descriptions through the Anthropic API. The workflow included validation rules, cost checks, and a 500-video pilot.
+- Built a taxonomy normalizer that combines vector-embedding candidates with Anthropic API classification. Low-confidence suggestions go to editorial review, and accepted mappings become examples in later prompt context.
+- Led a cross-team rollout that replaced burned-in video URLs with downloadable resources. Pacman publishes and republishes the PDF artifacts automatically, removing manual uploads from the release workflow.
+- Migrated publishing APIs to managed Linux VMs, reducing dependence on workstation Python environments and giving operators self-service access without routine server logins.
 
-### Tools & Technologies
-- **Development**: Git, VS Code, Cursor, pre-commit hooks
-- **Testing**: Pytest, unit testing, integration testing, E2E testing
-- **Infrastructure**: Distributed systems, cloud architecture, media workflow automation
-- **APIs**: Spotify API, YouTube API, REST APIs
+### LinkedIn — Senior Workflow Engineer
 
----
+**March 2021–April 2025**
 
-## Professional Experience
+- Owned Publishing Operations delivery for the Telestream Vantage platform migration, coordinating automated testing with the engineering team and the post-migration review.
+- Founded a cross-region tooling program that brought 11 production tools into version control with named owners and documentation across North America and Europe.
+- Created a reusable **MediaAnalysis API** with PyMediaInfo for cloud-based studio services and a Python ETL pipeline for archive and storage-usage reporting.
+- Modernized captioning microservices to reduce dependence on a single vendor and expand language support.
+- Built VMAF-based video-quality analysis to inform HLS/DASH encoding decisions for the LinkedIn Learning catalog.
+- Developed media inspection and workflow utilities with Python, Bash, FFmpeg, and MediaInfo for remote production teams.
 
-### Staff Workflow Engineer @ LinkedIn
-**Sunnyvale, CA | March 2025 - Present**
+### Earlier LinkedIn Roles
 
-- **Leadership & Cross-Functional Impact**: Led GCP Tools Crew platform standardization initiative, coordinating 20+ developers and establishing tool development frameworks that improved cross-team productivity by 30%. Mentored international studio production teams (APAC-ZH, APAC-JP) through workflow automation, reducing manual intervention by 40%
+- **Workflow Engineer** — February 2021–March 2021
+- **Senior Compressionist** — September 2019–February 2021
+- **Video Compressionist** — December 2016–September 2019
 
-- **Media Ingest Tool**: Developed a full-stack Python and MySQL service to streamline ingest and distribution for LinkedIn Learning, reducing video publishing and onboarding time by 80%
+## Selected Systems
 
-- **Storage Replication Service**: Integrated a custom media replication service using Python, FFmpeg, FFProbe, and Cosmos DB to scale remote production for studios. Implemented Azure Front Door and Azure Functions to manage terabytes of media formats with acceptable latency
+### Pacman Publishing Orchestrator
 
-- **Batch Short Form Video Transcoding**: Built a microservice for high-volume short-form video transcoding, enabling partner engineering teams to batch retrieve media assets from Azure. The service was a critical prerequisite for the launch of the content creator video feature on Learning
+Python service that discovers publishing-ready content, applies eligibility and validation rules, schedules work, and submits media to Telestream Vantage. Regional requirements stay in reusable filters and adapters, avoiding duplicate pipelines.
 
-- **Caption Request Service**: Modernized captioning services, removing vendor lock-in and improving language support. Refactored monolithic code into modular services, improving maintainability and API integration
+### AI Captioning
 
-**Professional Tools & Automation** (2024-2025)
-- **Publishing Services API**: Led major refactoring of publishing services API (v1.3.0), migrating from legacy configuration to environment-based Pydantic configuration. Added SSL certificate management, environment-aware configuration factory, and comprehensive test coverage. Contributed 13,149+ lines across 6 PRs including PTOC validation enhancements
-- **Course Filename Validator**: Enhanced validation logic and error messaging for course filename patterns, implementing stricter pattern validation, improved locale/descriptor validation, and version management. Contributed 7 PRs with 870+ additions
-- **Reingest Scripts**: Refactored VIT WorkOrder Builder for better modularity, reducing complexity through component restructuring. Improved CLI command registration, logging, and added comprehensive unit tests. Contributed 3,210+ lines across 6 PRs
-- **Course Path Utilities**: Developed utilities for course path management and validation, fixing schema mappings and improving path handling. Contributed 4 PRs
-- **Caption Order Bot**: Fixed missing videos bug and improved caption ordering workflow automation. Contributed 2 PRs (316+ additions)
-- **Vantage Ingest Tool**: Enhanced Vantage ingest automation with ACL overrides and improved error handling. Contributed 3 PRs
-- **EMEA Swiss Knife Tools**: Developed collection of Python productivity tools for EMEA Encoding and Publication team, enhancing workflow efficiency
-- **Licensed Content to Vantage Pipeline**: Built automated validation and submission system for raw video files, bypassing manual video editing team processes. Implemented media validation with aspect ratio support (1:1 formats), mono-to-stereo audio conversion, and comprehensive type safety improvements
-- **Thumbnail Synchronization**: Developed automation tool for managing and synchronizing thumbnail images for LinkedIn Learning courses across project folders
-- **Cosmo Report Center Exporter**: Built Python tool for exporting reports from Cosmo report center, improving data accessibility
-- **Cronjob Lock Alert Service**: Developed GCP-based monitoring service for publishing operations cronjob locks with Teams webhook alerts via messaging stream
+Microsoft Whisper integration inside the Vantage workflow, with publishing gates kept independent from caption completion. The regression framework checks caption quality across formatting changes before production release.
 
----
+### PastForward Description Generation
 
-### Senior Video Encoding Technician 1 @ LinkedIn
-**Sunnyvale, CA | February 2016 - March 2025**
+Prompt and API harness for batch description generation, validation, cost checks, and publication to Cosmo. The team used the workflow to generate and publish roughly 54,000 descriptions.
 
-- **Video Quality Analysis**: Automated video encoding quality analysis using open-source VMAF library to optimize Apple HLS/DASH delivery and quality of experience (QoE) on our media platforms
+### Taxonomy Normalization
 
-- **Video Inspection Service**: Developed highly available video analysis micro-services with FFmpeg and MediaInfo, generating easy to understand video reports for customers. Deployed services on VMs to reduce latency. Adopted as a key production tool for agile remote video productions
+Hybrid workflow combining vector embeddings and Anthropic API classification. Editorial reviewers handle uncertain suggestions, and accepted mappings improve later prompt context.
 
-- **Media Archiving Pipeline**: Built E2E pipeline to manage media storage, archive, and metadata on storage that streamlined the studio processes and delivered a 70% improvement in "Time to Archive" across post-production teams, yielding 60% storage cost savings
+### LXG Cosmo Tools
 
----
+Python CLI for content-management operations across courses, projects, captions, categories, learning paths, and bulk transformers. Includes test-environment defaults, JSON output, dry-run previews, retryable failure files, and bundled agent instructions.
 
-## Key Projects
+## Education
 
-### CourseWeaver Content Repurposing Pipeline Optimization
-**Tech Stack**: Python, File Processing, Data Transformation
+**B.A., Radio-TV-Film**  
+California State University, Fullerton · 2015
 
-- Designed and built a robust file transformation utility that enabled efficient repurposing of educational video content
-- Engineered a solution with intelligent filename processing, flexible mapping capabilities, and comprehensive error handling
-- Accelerated course development cycles by 40% and increased content reuse by 65%, significantly reducing production costs while maintaining quality standards
+## Additional Material
 
-### Video Encoding Modernization — CDN Migration
-**Tech Stack**: Python, Cloud Infrastructure, Distributed Systems
-
-- Led a team of 5 engineers, established critical performance benchmarks, and optimized resource allocation
-- Significantly improved scalability and processing efficiency
-- Designed the parameters of a video codec configured across 8 distributed transcoding clusters
-
-### AI-Powered Screenshot Organizer (SaaS)
-**Tech Stack**: Next.js, TypeScript, React, Tailwind CSS, AI Research Tools, Pinata/IPFS, Vercel
-
-- Built SaaS application for automatic screenshot categorization using AI
-- Implemented OCR for text extraction and searchability
-- Integrated decentralized storage via Pinata Files API (IPFS)
-- Developed drag-and-drop interface with real-time AI analysis
-- Deployed on Vercel with serverless architecture
-
-### Agentic System Research Project
-**Tech Stack**: Python, FastAPI, Langgraph, Ollama, ChromaDB, Uvicorn
-
-- Research project exploring agentic systems for multi-step reasoning and tool usage
-- Used Langgraph for workflow orchestration and Ollama for local LLM inference
-- Implemented ChromaDB for embeddings and vector storage
-- Built custom tools for code execution, web search, and math operations
-- Created CLI interface for experimentation and research
-
-### YouTube to Spotify Archiver
-**Tech Stack**: Python, Spotify API, YouTube API, OAuth2, yt-dlp
-
-- Automated playlist migration from YouTube to Spotify
-- Achieved 85-95% success rate for popular playlists
-- Implemented fuzzy matching for song title/artist matching
-- Built CLI tool with dry-run capabilities and JSON metadata export
-- Integrated OAuth2 authentication for secure API access
-
-### Music Information Parser
-**Tech Stack**: Python, Selenium, Playwright, BeautifulSoup, lxml
-
-- Developed web scraping tool for extracting music metadata from dynamic pages
-- Supported multiple platforms: Spotify, YouTube Music, Facebook, Instagram
-- Implemented confidence scoring system for extraction results
-- Created browser console JavaScript for instant extraction
-- Built parser with multiple extraction methods and fallback strategies
-
-### Reddit Enhancement Suite (Contributor)
-**Tech Stack**: JavaScript, Chrome Extension API, Flow, Babel, Webpack
-
-- Contributed to open-source browser extension with 1M+ users
-- Worked on modular architecture for Reddit browsing enhancements
-- Implemented i18n support and cross-browser compatibility
-- Maintained codebase with Flow type checking and ESLint
-
----
-
-## Skills
-
-### Languages
-Python, SQL, Bash, CSS, HTML, Prompt Engineering
-
-### Infrastructure and Platform
-Observability, Data Analysis, Azure, NoSQL, Linux, Docker, Blob Storage, REST API, cloud architecture, distributed systems, and media workflow automation
-
-### Tools
-FastAPI, Django, Langchain, Langgraph, Azure App Services, Pydantic, PostgreSQL, MongoDB, Kafka, Redis, FFmpeg, HLS, Pytest, Azure Message Queues, Pandas
-
----
-
-## Key Achievements
-
-- Led GCP Tools Crew platform standardization, improving cross-team productivity by 30%
-- Reduced manual intervention by 40% through workflow automation for international teams
-- Reduced video publishing and onboarding time by 80% with Media Ingest Tool
-- Improved "Time to Archive" by 70% and achieved 60% storage cost savings
-- Accelerated course development cycles by 40% and increased content reuse by 65%
-- Led team of 5 engineers in video encoding modernization initiative
-- Built production-grade microservices handling high-volume media processing
-- Developed AI-powered tools with 85-95% accuracy rates
-
----
-
-## Additional Skills
-
-- **Workflow Automation**: ETL pipelines, batch processing, task scheduling
-- **Performance Optimization**: Code profiling, bottleneck identification, resource allocation
-- **System Design**: Microservices architecture, scalable systems, API design
-- **Problem Solving**: Debugging complex systems, root cause analysis
-- **Collaboration**: Cross-functional teamwork, technical leadership, mentoring
-- **Leadership**: Team coordination, platform standardization, cross-functional impact
-
----
-
-*Last Updated: [Current Date]*
+- [Project portfolio](PROJECTS.md)
+- [GitHub profile](README.md)
