@@ -1,648 +1,297 @@
-# Projects Portfolio
+# Projects
 
-A comprehensive overview of professional and personal projects showcasing technical expertise across media automation, AI research (prompt engineering, Langgraph, Ollama, ChromaDB), web development, and automation tools.
+Selected work across media processing, publishing platforms, applied AI, and developer tooling.
 
----
+My professional projects are internal to LinkedIn. The descriptions below focus on the problems, architecture, operating model, and outcomes without exposing source code or private implementation details.
 
-## 💼 Professional Projects @ LinkedIn
+## Portfolio Focus
 
-### 1. Licensed Content to Vantage Pipeline
-**Status**: Active | **Tech Stack**: Python 3.12, MediaInfo, pydub-ng, pymediainfo
+- **Media systems:** Ingest, transcoding, captions, quality analysis, document generation, and archiving
+- **Publishing platforms:** Python services, REST APIs, validation, queues, and operator-facing tools
+- **Applied AI:** Generation harnesses, evaluation, semantic matching, and human review
+- **Platform leadership:** Cross-region adoption, operating standards, production readiness, and knowledge transfer
 
-Automated validation and submission system for raw video files of licensed content to Vantage, bypassing the video editing team.
+## Career Context
 
-**Key Features**:
-- **Media Validation**: Comprehensive video file validation with support for 1:1 aspect ratios (1080x1080 to 3840x3840)
-- **Audio Processing**: Automatic mono-to-stereo conversion with backup functionality
-- **File Handling**: Unified video file selection combining MP4 and MOV files
-- **Type Safety**: Comprehensive type annotations and Optional handling throughout codebase
-- **Interactive Selection**: File selection with support for individual files, ranges, and wildcard patterns
-- **Truncated File Detection**: MediaInfo integration for detecting truncated files
-- **User Experience**: Enhanced input handling with graceful Ctrl-C exit and extended course ID format support
+- **Staff Publication Workflow Engineer, LinkedIn** — April 2025–present
+- **Senior Workflow Engineer, LinkedIn** — March 2021–April 2025
+- Earlier LinkedIn roles: Workflow Engineer, Senior Compressionist, and Video Compressionist
 
-**Technologies Used**:
-- Python 3.12
-- MediaInfo, pymediainfo for media analysis
-- pydub-ng for audio processing
-- colorlog for enhanced logging
-- Type annotations and type safety improvements
+## Professional Systems
 
-**Repository**: `mwerner_LinkedIn/enp-emea-licensed-to-vantage` (Private)
+### Pacman Publishing Orchestrator
 
-**Notable Technical Achievements**:
-- Implemented robust media validation pipeline
-- Created backup system for audio conversions
-- Enhanced type safety across entire codebase
-- Improved Linux compatibility for folder operations
+**Role:** System owner and lead developer  
+**Scope:** North American and European LinkedIn Learning publishing workflows  
+**Stack:** Python, FastAPI, SQLite, Telestream Vantage, Linux
 
-**Last Updated**: September 2024
+Publishing work previously depended on operators locating content, checking filenames and metadata, and submitting jobs manually. I designed Pacman to turn that process into a staged service:
 
----
+1. Discover content ready for publishing
+2. Apply locale, licensing, priority, and editorial-state rules
+3. Validate the media package
+4. Schedule work
+5. Submit approved jobs to Telestream Vantage
 
-### 3. Closed Caption Order Tool (GCP)
-**Status**: Active | **Tech Stack**: Python, Google Cloud Platform
+The implementation uses reusable filters and source/destination adapters so regional workflow changes do not require separate pipelines. I later added self-service APIs, preflight validation, retry windows, failure summaries, editorial escalation, and health alerts.
 
-GCP-based closed caption ordering system for E&P EMEA region, streamlining the caption workflow process.
+No-touch ingest increased from 55.6% in September to 100% in December 2025 across 455 reported ingests. The service remains active in production.
 
-**Key Features**:
-- Automated caption ordering workflow
-- GCP integration for cloud operations
-- EMEA region-specific optimizations
+### Microsoft Whisper Captioning in Telestream Vantage
 
-**Technologies Used**:
-- Python
-- Google Cloud Platform
-- API integrations
+**Role:** Publishing Operations integration owner  
+**Scope:** Requirements, UAT, release sign-off, regression testing, and post-launch support  
+**Stack:** Microsoft Whisper, Telestream Vantage, Python, SRT caption workflows
 
-**Repository**: `mwerner_LinkedIn/gcp-enp-emea-cc-order` (Private)
+I worked with the engineering team to bring Microsoft Whisper caption generation into the existing Vantage media pipeline.
 
-**Last Updated**: June 2024
+My work covered the Publishing Operations side of the system:
 
----
+- Defined requirements and production milestones
+- Kept caption completion outside the publishing-completion gate
+- Ran UAT and approved production releases
+- Built a regression framework to catch caption-quality drift across formatting changes
+- Reviewed post-launch patches and coordinated adoption with European operations
 
-### 4. Globus Thumbnail Distribution
-**Status**: Active | **Tech Stack**: Python 3.12, Systemd, Watchdog
+The partner launch report measured turnaround at about 10 minutes, down from 24 hours. Additional production languages followed after the English rollout.
 
-Hotfolder service for syncing graphics thumbnails to course projects. This service monitors configured directories for thumbnail files and processes them according to course ID, locale, and file type.
+### PastForward Description Generation
 
-**Key Features**:
-- **Automatic File Monitoring**: Polling-based hotfolder service with configurable intervals
-- **Course ID and Filename Validation**: Validates filenames against patterns and courselist CSV
-- **Multi-Locale Support**: Supports 7 locales (de_DE, en_US, es_ES, fr_FR, ja_JP, pt_BR, zh_CN)
-- **Intelligent Routing**: Automatic routing to course folders, asset bank, and archive based on locale and file type
-- **Remote Sync Support**: EMEAL locales (de_DE, es_ES, fr_FR, pt_BR) processed for remote sync with outgoing cache
-- **Audio-Only File Handling**: Special handling for audio-only files with dedicated destinations
-- **Structured Logging**: Comprehensive logging with correlation IDs for traceability
-- **Retry Logic**: Exponential backoff retry mechanism for transient failures
-- **Mount Availability Monitoring**: Health checks verify mount points before processing
-- **Systemd Watchdog Integration**: Production-ready service health monitoring with automatic restart
-- **Courselist Freshness Validation**: Warns when courselist CSV is stale (configurable threshold)
+**Role:** Prompt and harness engineer  
+**Scope:** Batch generation, validation, cost modeling, and publication  
+**Stack:** Python, Anthropic Messages API, YAML validation rules, Cosmo
 
-**Technologies Used**:
-- Python 3.12
-- Systemd service management
-- Watchdog integration for health monitoring
-- Environment-based configuration (Pydantic-style)
-- Structured logging with rotation
-- File system operations and path management
+PastForward regenerated editorial descriptions for the LinkedIn Learning back catalog.
 
-**Repository**: `lct-globus-thumbnail-distribution` (Private)
+I engineered the prompts and Python harness used to process the content through the Anthropic API. The workflow included:
 
-**Notable Technical Achievements**:
-- Production-ready service with systemd integration
-- Robust error handling with failed file isolation
-- Health monitoring and mount availability checks
-- Configurable via environment variables with sensible defaults
-- Comprehensive logging for debugging and monitoring
+- Structured request and response handling
+- Output validation rules
+- Cost modeling before full processing
+- A 500-video pilot
+- Publication of validated descriptions to Cosmo
 
-**Last Updated**: January 2025
+The team generated and published roughly 54,000 video descriptions through the workflow.
 
----
+### Semantic Skill Mapping — Integration Guidance
 
-### 5. Cosmo Report Center Exporter
-**Status**: Active | **Tech Stack**: Python
+**Role:** AI integration advisor  
+**Scope:** Testing strategy, validation, deployment readiness, and system integration  
+**System context:** Python, vector embeddings, Anthropic Messages API
 
-Python tool for exporting reports from Cosmo report center, improving data accessibility and workflow efficiency.
+The internal Taxonomy team developed a workflow that uses vector embeddings and Anthropic API classification to map customer terminology to the LinkedIn Learning skills taxonomy.
 
-**Key Features**:
-- Report export automation
-- Data extraction and formatting
-- Integration with Cosmo report center
+I helped the team:
 
-**Technologies Used**:
-- Python
-- Data processing libraries
-- Report generation
+- Shape test plans and validation scenarios
+- Review how uncertain suggestions reached editorial review
+- Assess deployment readiness and operational risks
+- Align the AI workflow with surrounding content-management systems
+- Define the broader integration strategy
 
-**Repository**: `mwerner_LinkedIn/enp-emea-cosmo-report-center-exporter` (Private)
+This was an advisory and integration role. I did not build the taxonomy normalizer.
 
-**Last Updated**: October 2024
+### LXG Cosmo Tools
 
----
+**Role:** Primary maintainer and platform developer  
+**Scope:** Content operations, safe bulk updates, agent interfaces, and distribution  
+**Stack:** Python 3.12, Click, REST APIs, pytest, GitHub Releases
 
-### 6. Cronjob Lock Alert Service (GCP)
-**Status**: Active | **Tech Stack**: Python, Google Cloud Platform, Microsoft Teams
+`lxg-cosmo-tools` gives content teams a command-line interface to LinkedIn Learning's content-management system.
 
-Publishing Operations cronjob lock monitor with Teams webhook alerts using messaging stream to file.
+The command surface covers projects, tasks, courses, captions, categories, learning paths, filter views, and bulk transformers. The tool is designed for both direct use and agent-guided workflows:
 
-**Key Features**:
-- Cronjob lock monitoring
-- Teams webhook integration for alerts
-- Messaging stream to file
-- Automated alerting system
+- Structured JSON output for reliable tool consumption
+- Test-environment defaults for safer exploration
+- Validation safeguards for bulk changes
+- Retryable failure files for partial operations
+- Bundled command and field references
+- Pytest regressions for API response handling, CLI behavior, and skill installation
 
-**Technologies Used**:
-- Python
-- Google Cloud Platform
-- Microsoft Teams API
-- File-based messaging streams
+The goal is not to make an agent guess how the content system works. The CLI provides a defined interface, and the bundled instructions teach agents how to use it.
 
-**Repository**: `ehernand_LinkedIn/gcp-cron-lock-alert-service` (Private)
+### Publishing Services API
 
-**Last Updated**: July 2024
+**Role:** Backend and platform developer  
+**Scope:** Publishing metadata, validation, media actions, document artifacts, and operator access  
+**Stack:** Python, FastAPI, Pydantic, REST APIs, Linux, Azure
 
----
+I rebuilt and extended a shared publishing API that supports course metadata, media operations, ingest validation, and PDF/JSON artifacts.
 
-### 7. Publishing Services API
-**Status**: Active | **Tech Stack**: Python, FastAPI, Pydantic, SSL/TLS
+Platform work included:
 
-Major refactoring and enhancement of publishing services API, migrating to modern configuration patterns and adding comprehensive features.
+- Environment-based Pydantic configuration
+- Certificate and service-authentication support
+- Validation endpoints shared by multiple workflows
+- Severity-based notifications
+- Managed Linux VM deployment
+- Self-service access that reduced routine server logins
+- Copy-failure recovery and service-health alerts
 
-**Key Features**:
-- **Configuration Refactoring**: Migrated from legacy api_secrets.py to environment-based configuration using Pydantic
-- **SSL Certificate Management**: Comprehensive SSL certificate setup script with validation and extraction
-- **Environment-Aware Configuration**: Factory pattern for development/production environments
-- **FastAPI Enhancements**: SSL support and enhanced health/config endpoints
-- **Email Configuration**: Refactored to use environment variables instead of JSON files
-- **TOC/PTOC Endpoints**: Action-based filtering and improved functionality
-- **PTOC Validation**: Enhanced validation service with path-based validation and business rule improvements (13,149+ additions)
+### URL Resource PDF Workflow
 
-**Technologies Used**:
-- Python, FastAPI
-- Pydantic for configuration management
-- SSL/TLS certificate handling
-- Environment-based configuration
-- Dependency injection patterns
+**Role:** Project lead and workflow integrator  
+**Scope:** Editing, Publishing Operations, production management, and accessibility review  
+**Stack:** Python, PDF generation, Pacman, publishing APIs
 
-**Repository**: `linkedin-managed/pub-ops-publishing-services-api` (Private)
+Course URLs had been burned into videos, making them difficult to update and impractical for screen-reader users.
 
-**Contributions**: 6 PRs, including major v1.3.0 release with 2,763 additions, 492 deletions
+I led the move to downloadable URL-resource PDFs:
 
-**Last Updated**: November 2024
+- Started with a written workflow proposal
+- Coordinated the decision with Editing, Publishing Operations, and Trust & Equity
+- Integrated PDF publishing into Pacman
+- Added automatic republishing on release day
 
----
+The rollout replaced burned-in URL overlays and removed manual PDF uploads. Accessibility claims remain limited to the reviewed technical components and do not cover every course asset.
 
-### 8. Course Filename Validator
-**Status**: Active | **Tech Stack**: Python, Validation, Pattern Matching
+### Media Analysis and Quality Tooling
 
-Enhanced validation system for course filename patterns with improved error messaging and stricter validation rules.
+**Role:** Developer  
+**Scope:** Inspection, delivery decisions, and cloud studio workflows  
+**Stack:** Python, PyMediaInfo, FFmpeg, VMAF, HLS/DASH
 
-**Key Features**:
-- **Stricter Pattern Validation**: Removed backward compatibility for legacy formats, enforcing clear separation between PERPETUAL and PERPETUAL_V2 patterns
-- **Enhanced Validation Logic**: Improved locale regex (mixed-case support), robust multi-part descriptor detection, early failure for invalid course IDs
-- **Improved Error Messaging**: Standardized error messages with consistent "Pattern:" prefix, better formatting and clarity
-- **Version Management**: Version bumping and changelog management
-- **Performance Optimizations**: Early failure mechanisms for better performance
+I built reusable media-analysis tools for production teams:
 
-**Technologies Used**:
-- Python
-- Regex pattern matching
-- Validation frameworks
-- Error handling and messaging
+- A MediaAnalysis API built with PyMediaInfo
+- Video inspection reports generated from FFmpeg and MediaInfo
+- VMAF-based analysis used to inform HLS/DASH encoding decisions
+- Validation utilities for source media and publishing packages
 
-**Repository**: `linkedin-managed/pubops-course-filename-validator` (Private)
+These tools turned media inspection into repeatable APIs and reports instead of one-off command-line analysis.
 
-**Contributions**: 7 PRs, including major enhancement with 870 additions, 494 deletions
+### Media Archiving ETL
 
-**Last Updated**: November 2024
+**Role:** Pipeline developer  
+**Scope:** Asset classification, archive reporting, metadata, and storage transitions  
+**Stack:** Python, SQL, file-system metadata, scheduled ETL
 
----
+I developed a Python ETL pipeline for archive and storage-usage reporting. The system identifies eligible content using age, publication status, and operational metadata, then prepares the information needed for archive transitions.
 
-### 9. Reingest Scripts
-**Status**: Active | **Tech Stack**: Python, CLI, Modular Architecture
+This replaced manual classification and gave post-production teams a repeatable view of archive candidates and storage usage.
 
-Refactored VIT WorkOrder Builder for better modularity and maintainability, improving code organization and test coverage.
+## Platform Leadership
 
-**Key Features**:
-- **Modular Restructuring**: Reduced complexity by restructuring main script into modular components
-- **CLI Command Registration**: Improved CLI interface with command registration
-- **Enhanced Logging**: Better logging setup and configuration
-- **Test Coverage**: New test configurations and comprehensive unit tests for CLI commands
-- **Maintainability**: Enhanced readability and maintainability through better code organization
+### Cross-Region Tooling Program
 
-**Technologies Used**:
-- Python
-- CLI frameworks
-- Modular architecture patterns
-- Unit testing frameworks
+I founded a tooling program spanning North America and Europe after finding production scripts and extensions scattered across individual machines.
 
-**Repository**: `linkedin-managed/pub-ops-reingest-scripts` (Private)
+The program established:
 
-**Contributions**: 6 PRs, including major refactoring with 3,210 additions, 472 deletions
+- Shared repositories and naming conventions
+- Named owners for production tools
+- Documentation and onboarding guidance
+- A tiered model for experimental, shared, and managed tools
+- A working relationship with engineering centered on mentorship and risk review
 
-**Last Updated**: June 2024
+Eleven production tools were under version control by the end of March 2025.
 
----
+### Minimum Viable Trust
 
-### 10. Course Path Utilities
-**Status**: Active | **Tech Stack**: Python, Path Management, Schema Validation
+As AI-assisted development made it easier for non-engineers to create internal tools, I wrote an multi criterion review framework covering ownership, users, maintenance, documentation, source control, backups, security review, peer review, succession, and engineering involvement.
 
-Utilities for course path management and validation, fixing schema mappings and improving path handling.
+The framework gave managers, builders, and engineering teams a shared way to decide when a prototype was ready to support production work.
 
-**Key Features**:
-- Course path management utilities
-- Schema mapping fixes
-- Path validation and handling
-- Missing return statement fixes
+### Platform and Workflow Taxonomy
 
-**Technologies Used**:
-- Python
-- Path manipulation libraries
-- Schema validation
+**Role:** Technical lead and cross-team advisor  
+**Scope:** Internal tools, production studio filesystems, CMS states, and AI integrations
 
-**Repository**: `linkedin-managed/enp-course-path-utils` (Private)
+I guide taxonomy and naming decisions across the systems used to produce and publish content. This work is separate from the semantic skill-mapping project.
 
-**Contributions**: 4 PRs
+The shared vocabulary covers:
 
-**Last Updated**: November 2024
+- Tool categories such as scripts, services, skills, and managed applications
+- Production filesystem names and workflow-oriented folder boundaries
+- CMS contract types, status fields, and publishing handoffs
+- Ownership and lifecycle expectations for AI-enabled tools
 
----
+Regional teams can use the same terms, ownership boundaries, and handoff points when they design new workflows.
 
-### 11. Caption Order Bot (GCP)
-**Status**: Active | **Tech Stack**: Python, Google Cloud Platform, Automation
+## Studio AI Integration Prototypes
 
-GCP-based bot for automated caption ordering workflow, fixing bugs and improving automation.
+I built this family of public prototypes to explore a practical question: where should a model help in a studio workflow, and where should ordinary software remain in control?
 
-**Key Features**:
-- Automated caption ordering
-- Missing videos bug fixes
-- Workflow automation improvements
+The applications share a small agent core, stable machine-readable interfaces, deterministic validation, offline test paths, and per-run telemetry. Together they cover agent observability, caption repair, editorial change lists, delivery conformance, and production-tracking queries.
 
-**Technologies Used**:
-- Python
-- Google Cloud Platform
-- Automation frameworks
+These are public prototypes and reference implementations, not claims that they are deployed at a studio.
 
-**Repository**: `linkedin-managed/gcp-enp-caption-order-bot` (Private)
+### [ReplyKit](https://github.com/eggy-sh/replykit)
 
-**Contributions**: 2 PRs (316+ additions, 89 deletions)
+**Role in the family:** Shared agent I/O engine  
+**Stack:** Python, provider adapters, structured tool calls, token/cost telemetry
 
-**Last Updated**: November 2024
+ReplyKit is the common layer beneath the post-production tools. It gives each application the same model interface, tool registry, bounded repair loop, and usage telemetry without binding the application to one model provider.
 
----
+**Benefit:** A studio tool can change model providers without rewriting its business logic. Malformed tool calls follow a bounded repair path, and every call reports tokens, estimated cost, and repair attempts.
 
-### 12. Vantage Ingest Tool
-**Status**: Active | **Tech Stack**: Perl, Automation, Media Processing
+### [Agent Heart](https://github.com/eggy-sh/agent-heart)
 
-Enhanced Vantage ingest automation with ACL overrides and improved error handling.
+**Role in the family:** Observability and oversight for agent-run tools  
+**Stack:** TypeScript, CLI and SDK, HTTP API, SQLite
 
-**Key Features**:
-- Vantage ingest automation
-- ACL override functionality
-- Improved error handling
-- Media processing workflows
+Agent Heart tracks a tool call from start through heartbeat and completion. It distinguishes active, stale, dead, failed, and completed-but-unverified work, including parent/child task trees.
 
-**Technologies Used**:
-- Perl
-- Automation scripts
-- Media processing tools
+It also records duration, token use, cost, and verification status. Commands can be wrapped without changing their implementation.
 
-**Repository**: `linkedin-managed/gcp-vantage-ingest-tool` (Private)
+**Benefit:** Long-running agent workflows stop being silent processes. Operators can see what started, where a run stalled, which child task failed, and whether completed work still needs review.
 
-**Contributions**: 3 PRs
+### [Subtitle Medic](https://github.com/eggy-sh/subtitle-medic)
 
-**Last Updated**: July 2024
+**Role in the family:** Caption QA and cue-scoped correction  
+**Stack:** Python, SRT/WebVTT, glossary validation, ReplyKit
 
----
+Subtitle Medic checks caption structure and readability, then optionally sends only flagged cue text to a model for correction.
 
-## 🚀 Personal Projects
+Timing, cue indexes, and cue count remain outside the model's control. The full document is validated again before output, and glossary terms are checked after correction.
 
----
+**Benefit:** A caption workflow can use language models for text cleanup without risking timeline drift or malformed deliverables. The deterministic QA path works without a model or network connection.
 
-## 🤖 AI Research Projects
+### [Cutlist](https://github.com/eggy-sh/cutlist)
 
-### 7. AI-Powered Screenshot Organizer (SaaS)
-**Status**: Active | **Tech Stack**: Next.js, TypeScript, React, Tailwind CSS, AI Research Tools, Pinata/IPFS, Vercel
+**Role in the family:** Editor notes to timeline-ready change lists  
+**Stack:** Python, OpenTimelineIO, CMX3600 EDL, Frame.io exports, ReplyKit
 
-A production-ready SaaS application that automatically categorizes and analyzes screenshots using AI research tools. Features OCR for text extraction and decentralized storage on IPFS.
+Cutlist turns free-form editor or director notes into discrete change requests with actions, rationales, source references, confidence, and frame-accurate timecodes.
 
-**Key Features**:
-- Screenshot categorization using AI research tools (Work, Shopping, Entertainment, etc.)
-- OCR for text extraction and searchability
-- Decentralized storage via Pinata Files API (IPFS)
-- Cross-device sync capability
-- Drag-and-drop interface with real-time analysis
-- Serverless deployment on Vercel
+The model interprets the prose. Deterministic code performs the timecode math and writes OpenTimelineIO and EDL files that editorial systems can import.
 
-**Technologies Used**:
-- Frontend: Next.js 14, React 18, TypeScript
-- UI: Tailwind CSS, Radix UI, Framer Motion, shadcn/ui
-- AI: AI research tools for OCR and classification
-- Storage: Pinata Files API for IPFS
-- Deployment: Vercel serverless functions
+**Benefit:** Assistant editors spend less time transcribing review notes into a timeline. Each change remains traceable to its source, and the exported formats are validated by reading them back through editorial parsers.
 
-**Repository**: `ai-screenshot-organiser/`
+### [Conforma](https://github.com/eggy-sh/conforma)
 
----
+**Role in the family:** Media and editorial-sequence conformance  
+**Stack:** Python, YAML specifications, ffprobe/MediaInfo JSON, OpenTimelineIO, ReplyKit
 
-### 8. Agentic System Research Project
-**Status**: Active | **Tech Stack**: Python, FastAPI, Langgraph, Ollama, ChromaDB
+Conforma checks rendered media against delivery requirements such as resolution, frame rate, codec, bit depth, audio layout, and container. It also checks exported timelines for slate length, muted reference audio, and track layout.
 
-Research project exploring agentic systems for multi-step reasoning and tool usage, using Langgraph for workflow orchestration and Ollama for local LLM inference.
+Pure rule functions produce the pass/fail result and concrete fix commands. A model may explain the report or classify an ambiguous track role, but it cannot override a deterministic failure.
 
-**Key Features**:
-- Multi-step reasoning and task breakdown using Langgraph
-- Local LLM inference with Ollama
-- ChromaDB for embeddings and vector storage
-- Custom tools: code execution, web search, math operations
-- CLI interface for experimentation
-- FastAPI/Uvicorn server
+**Benefit:** Delivery specifications become versioned data that can run in CI or a studio pipeline. The same rules work with ffprobe or MediaInfo output and across OTIO-supported editorial formats.
 
-**Technologies Used**:
-- Python 3.10+, FastAPI, Uvicorn
-- Langgraph for workflow orchestration
-- Ollama for local LLM inference
-- ChromaDB for embeddings and vector storage
-- Custom tool integration framework
+### [Slack Glue](https://github.com/eggy-sh/slack-glue)
 
-**Repository**: `llama-agentic-system/`
+**Role in the family:** Natural-language access to production tracking  
+**Stack:** Python, Slack Events API, validated query schemas, mock ShotGrid, ReplyKit
 
-**Research Focus**:
-- Exploring agentic workflows and tool integration
-- Experimenting with local LLM inference
-- Vector storage and embedding research
-- Prompt engineering and optimization
+Slack Glue translates a producer's plain-language request into a strict query schema and executes it against production-tracking data.
 
----
+The model selects only from allowed endpoints, fields, and enum values. Deterministic code validates the query, retrieves records, counts results, and formats the reply. Unsupported terms produce a targeted clarification instead of an invented answer.
 
-### 9. Image Tagger with Vector Storage
-**Status**: Active | **Tech Stack**: Python, ChromaDB, PIL
+**Benefit:** Producers can ask operational questions where they already work without giving a language model authority over the system of record.
 
-Image tagging system using vector storage for similarity search and embeddings.
+### Shared Design Principles
 
-**Key Features**:
-- Image tagging with vector-based similarity search
-- ChromaDB for embeddings and vector storage
-- Web interface for image processing
-- Batch processing capabilities
+- Put models at the ambiguous language boundary, not in charge of deterministic truth
+- Use stable JSON and domain objects between agent and application layers
+- Preserve source provenance and make uncertainty visible to operators
+- Keep tests hermetic with scripted or local model substitutes
+- Track token use, cost, repair attempts, and verification status per run
+- Export formats that existing studio tools already understand
 
-**Technologies Used**:
-- Python
-- ChromaDB for vector database and embeddings
-- PIL for image processing
-- Web interface (Flask/Streamlit)
+## More
 
-**Repository**: `llama-vision-image-tagger/`
-
----
-
-## 🎵 Media & Music Automation Projects
-
-### 10. YouTube to Spotify Archiver
-**Status**: Active | **Tech Stack**: Python, Spotify API, YouTube API, OAuth2, yt-dlp
-
-Automated tool for migrating playlists from YouTube to Spotify with high accuracy matching.
-
-**Key Features**:
-- Automated playlist migration (85-95% success rate)
-- Fuzzy matching for song titles and artists
-- OAuth2 authentication for secure API access
-- JSON metadata export
-- Dry-run mode for testing
-- Comprehensive logging
-
-**Technologies Used**:
-- Python 3.8+
-- Spotify API (spotipy)
-- YouTube API (google-api-python-client)
-- yt-dlp for video metadata
-- thefuzz for fuzzy string matching
-- OAuth2 for authentication
-
-**Repository**: `Youtube-to-Spotify-Archiver/`
-
-**Stats**: Successfully migrated 142 songs out of 150 from a test playlist (94.7% success rate)
-
----
-
-### 11. Music Information Parser
-**Status**: Active | **Tech Stack**: Python, Selenium, Playwright, BeautifulSoup
-
-Web scraping tool for extracting music metadata from dynamic web pages across multiple platforms.
-
-**Key Features**:
-- Multi-platform support (Spotify, YouTube Music, Facebook, Instagram, etc.)
-- Multiple extraction methods with confidence scoring
-- Browser console JavaScript for instant extraction
-- Selenium and Playwright support
-- Pattern matching for various site structures
-
-**Technologies Used**:
-- Python, BeautifulSoup4, lxml
-- Selenium 4.15+, Playwright
-- Pattern matching and CSS selectors
-- Confidence scoring algorithm
-
-**Repository**: `music_parser/`
-
-**Supported Platforms**:
-- ✅ Spotify Web Player
-- ✅ YouTube Music
-- ✅ Apple Music Web
-- ✅ SoundCloud
-- ✅ Bandcamp
-- ✅ Facebook/Instagram music posts
-
----
-
-## 🌐 Browser Extensions & Web Tools
-
-### 12. Reddit Enhancement Suite (Contributor)
-**Status**: Active Contributor | **Tech Stack**: JavaScript, Chrome Extension API, Flow, Babel
-
-Open-source browser extension with 1M+ users for enhancing Reddit browsing experience.
-
-**Key Contributions**:
-- Modular architecture development
-- Cross-browser compatibility (Chrome, Firefox)
-- i18n support implementation
-- Code quality improvements (Flow, ESLint)
-- Build system optimization
-
-**Technologies Used**:
-- JavaScript (ES6+), Flow type system
-- Babel, Webpack, esbuild
-- Chrome Extension API, Firefox WebExtensions API
-- SCSS, PostCSS
-- Nightwatch for E2E testing
-
-**Repository**: `Reddit-Enhancement-Suite/`
-
----
-
-### 13. YouTube Playlist Cleaner
-**Status**: Active | **Tech Stack**: JavaScript, Chrome Extension API
-
-Browser extension for managing and cleaning YouTube playlists with batch operations.
-
-**Key Features**:
-- Batch playlist operations
-- User-friendly interface
-- Efficient playlist management
-- Clean and simple UI
-
-**Technologies Used**:
-- JavaScript
-- Chrome Extension Manifest V3
-- YouTube API integration
-
-**Repository**: `YouTube-Playlist-Cleaner/`
-
----
-
-### 14. YouTube Watch Later Deleter
-**Status**: Active | **Tech Stack**: JavaScript, Chrome Extension API
-
-Simple browser extension for managing YouTube Watch Later playlist.
-
-**Key Features**:
-- Quick deletion of watch later items
-- Batch operations support
-- Lightweight and fast
-
-**Technologies Used**:
-- JavaScript
-- Chrome Extension API
-- Content scripts and background workers
-
-**Repository**: `youtube-watch-later-deleter/`
-
----
-
-## 📊 Project Statistics & Impact
-
-### Code Quality
-- **Total Projects**: 20+ active projects (12+ professional + 8 personal)
-- **Active Contributions**: 50+ pull requests across 19+ repositories
-- **Major Refactorings**: Publishing Services API (13,149+ additions), Reingest Scripts (3,210+ additions), Course Filename Validator (870+ additions)
-- **Languages**: Python, JavaScript/TypeScript, SQL, Bash
-- **Frameworks**: Next.js, FastAPI, React, Chrome Extensions
-- **APIs Integrated**: Spotify, YouTube, Brave Search, Wolfram Alpha, Pinata/IPFS
-
-### Performance Metrics
-- **Video Processing**: 60% HLS performance improvement
-- **Media Workflows**: 80% QoE increase
-- **Archiving Efficiency**: 70% process improvement
-- **Playlist Migration**: 85-95% success rate
-
-### Technical Highlights
-- Production-grade microservices architecture
-- Cloud migration leadership (on-premises to AWS)
-- AI research with Langgraph, Ollama, and ChromaDB
-- Decentralized storage implementation (IPFS)
-- Cross-platform browser extension development
-- Professional media automation tools for enterprise use
-- GCP-based automation and monitoring services
-- Advanced media validation and processing pipelines
-
----
-
-## 🔧 Technical Patterns & Practices
-
-### Architecture Patterns
-- **Microservices**: Modular, scalable service architecture
-- **Serverless**: Vercel serverless functions, AWS Lambda
-- **API-First**: RESTful APIs with FastAPI and Next.js API routes
-- **Event-Driven**: Asynchronous processing for media workflows
-
-### Development Practices
-- **Type Safety**: TypeScript, Flow, Python type hints
-- **Testing**: Unit tests, integration tests, E2E testing
-- **CI/CD**: Automated builds and deployments
-- **Code Quality**: ESLint, Prettier, Black, pre-commit hooks
-
-### DevOps & Deployment
-- **Cloud Platforms**: AWS, Azure, Vercel
-- **Containerization**: Docker (where applicable)
-- **Version Control**: Git with proper branching strategies
-- **Monitoring**: Logging, performance metrics, error tracking
-
----
-
-## 🚀 Future Projects & Ideas
-
-### Planned Enhancements
-- Enhanced prompt engineering and AI research tool integration
-- Real-time collaboration features
-- Mobile app versions of key tools
-- Advanced analytics and reporting
-- Integration with more platforms and services
-
-### Learning Focus
-- Advanced prompt engineering techniques
-- Distributed systems architecture
-- Performance optimization techniques
-- Accessibility improvements
-- Security best practices
-
----
-
-## 📝 Project Organization
-
-### Personal Projects
-All personal projects are organized in the `/Users/ehernand/personal_projects/` directory:
-
-```
-personal_projects/
-├── ai-screenshot-organiser/     # Next.js SaaS app
-├── llama-agentic-system/        # AI agentic system
-├── llama-vision-image-tagger/    # Image tagging tool
-├── Youtube-to-Spotify-Archiver/ # Playlist migration tool
-├── music_parser/                 # Music metadata extractor
-├── Reddit-Enhancement-Suite/     # Browser extension (contributor)
-├── YouTube-Playlist-Cleaner/     # Playlist management tool
-└── youtube-watch-later-deleter/  # Watch later manager
-```
-
-### Professional Projects @ LinkedIn
-Professional projects are hosted on LinkedIn's GitHub organization:
-
-**Publishing Operations & Orchestration:**
-```
-linkedin-managed/
-├── pub-ops-publishing-services-api (6 PRs, 13,149+ additions)
-├── pubops-course-filename-validator (7 PRs, 870+ additions)
-├── pub-ops-reingest-scripts (6 PRs, 3,210+ additions)
-├── enp-course-path-utils (4 PRs)
-├── pubops-sandbox (3 PRs)
-└── gcp-vantage-ingest-tool (3 PRs)
-```
-
-**Caption & Media Services:**
-```
-linkedin-managed/
-├── gcp-enp-caption-order-bot (2 PRs, 316+ additions)
-└── gcp-enp-vantage-ingest-copy-service (3 PRs)
-```
-
-**EMEA Tools & Utilities:**
-```
-mwerner_LinkedIn/
-├── enp-emea-licensed-to-vantage
-├── gcp-enp-emea-cc-order
-└── enp-emea-cosmo-report-center-exporter
-```
-
-**LinkedIn Learning Content Tools:**
-```
-lct-globus-thumbnail-distribution/
-└── globus-thumbnail-distribution (Hotfolder service)
-```
-
-**Other Services:**
-```
-linkedin-managed/
-├── gcp-gfx-genome (3 PRs, JavaScript)
-├── gcp-create-course-toc (2 PRs)
-├── gcp-edit-sagan (1 PR)
-├── gcp-editing-auto-scheduler (2 PRs)
-├── gcp-ppm-auto-scheduler (1 PR)
-└── gcp-ppm-clickup-cosmo-sync (2 PRs)
-
-ehernand_LinkedIn/
-└── gcp-cron-lock-alert-service
-```
-
----
-
-## 🔗 Links & Resources
-
-- **GitHub**: [edgarh92](https://github.com/edgarh92)
-- **Twitter**: [@eggpression](https://twitter.com/eggpression)
-- **LinkedIn**: [ehernandez0](https://linkedin.com/in/ehernandez0)
-- **Email**: h.edgar714@gmail.com
-
----
-
-*Last Updated: [Current Date]*
-
+- [Profile](README.md)
+- [Résumé](RESUME.md)
+- [LinkedIn](https://linkedin.com/in/ehernandez0/)
+- [GitHub](https://github.com/eggy-sh)
